@@ -1,0 +1,56 @@
+
+Setting up the environment:
+
+This script will launch your aws conda environment. The yml file to create the environment is included.
+This can be done with the command:
+
+conda env create -f aws.yml
+
+However, you will also need to configure your aws environment to log you into the aws server.
+You will need acces by an IAM identity that can be made by David.
+Once you have this you can see your aws access key and your aws secret access key, which are required to authenticate you.
+
+To set the variables just once, use export:
+export AWS_ACCESS_KEY_ID="your_access_key"
+export AWS_SECRET_ACCESS_KEY="your_secret_key"
+export AWS_DEFAULT_REGION="us-west-2"
+export AWS_DEFAULT_OUTPUT="json"
+
+To set those variables every time you log in, simply add those lines to the bottom of your ~/.bashrc file.
+
+
+Setting up the script files:
+
+The script needs to be run in whatever directory the folders you want to move are, and in the same directory as the topfolders.txt file.
+In the topfolders.txt file there should be the folder names without a forward slash at the end, a sample file is included.
+
+
+Actually running the script:
+
+The script itself can take a lot of time if you are uploading large files.
+Therefore, you may want to run it on the data transfer server:
+
+after you have logged into the cluster, connect to the data transfer server using:
+ssh your_id@dtn-1.gs.washington.edu
+
+You cluster password will work here as well and you will need to authenticate it.
+
+Afterward, you will want to make sure the script can run in the background, which can be done with screen.
+
+Screen comes installed so simply type the command:
+
+screen
+
+which will look like nothing happened except it cleared your terminal. It actually created a new instance for you, though.
+
+You can now run the script using source, so that conda works properly:
+
+source upload_to_aws.sh
+
+This will begin the script, so you can now hit Ctrl-a followed by d, and this will "detach" you from the instance.
+It should put you back in your original instance but leave it running in the background.
+You can confirm this by the command:
+
+screen -ls
+
+Which will list your active screens. Once you see it there, you can exit the dtn-1 head and let it do its thing.
