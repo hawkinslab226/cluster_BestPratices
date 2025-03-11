@@ -54,3 +54,12 @@ You can confirm this by the command:
 screen -ls
 
 Which will list your active screens. Once you see it there, you can exit the dtn-1 head and let it do its thing.
+
+You can reconnect to a detached socket with the following command:
+screen -R {socket_id}
+
+You can delete a socket you are done with by typing "exit" after being reconnected with the socket.
+
+
+
+
